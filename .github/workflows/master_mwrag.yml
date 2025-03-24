@@ -17,9 +17,10 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Upgrade pip and install dependencies
+      - name: Upgrade pip, downgrade setuptools, and install dependencies
         run: |
           pip install --upgrade pip
+          pip install setuptools==65.5.0
           pip install .
 
       # Optional: Run your tests here
