@@ -22,10 +22,6 @@ jobs:
           pip install --upgrade pip
           pip install setuptools==65.5.0
 
-      - name: Patch and install docx2txt
-        # This calls your composite action defined in .github/actions/docx.yaml
-        uses: ./.github/actions/docx
-
       - name: Install your package without build isolation
         run: pip install . --no-build-isolation
 
