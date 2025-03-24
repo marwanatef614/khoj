@@ -1,0 +1,16 @@
+- name: Patch and install docx2txt
+  run: |
+    # Download the specified version of docx2txt
+    pip download docx2txt==0.8
+    # Locate the downloaded tar.gz file (e.g. docx2txt-0.8.tar.gz)
+    tarball=$(ls docx2txt-*.tar.gz)
+    # Extract the tarball
+    tar -xzf "$tarball"
+    # Determine the folder name from the tarball (assumes first entry is folder/)
+    folder=$(tar -tf "$tarball" | head -n1 | cut -d/ -f1)
+    # Patch setup.cfg: replace 'description-file' with 'description_file'
+    sed -i 's/description-file/description_file/g' "$folder/setup.cfg"
+    # Enter the patched directory and install the package
+    cd "$folder"
+    pip install .
+    cd ..
